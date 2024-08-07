@@ -52,10 +52,10 @@ import {watch, ref} from 'vue';
 
   @keyframes shake {
     0% {
-      transform: rotate(-5deg);
+      transform: rotate(-5deg) scale(1.1);
     }
     100% {
-      transform: rotate(5deg);
+      transform: rotate(5deg) scale(1);
     }
   }
 </style>

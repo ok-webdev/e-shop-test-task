@@ -45,11 +45,12 @@
     border-color: #888;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   }
+
   .item-card:nth-child(odd):hover {
-    transform: rotate(2deg);
+    transform: rotate(2deg) scale(1.1);
   }
   .item-card:nth-child(even):hover {
-    transform: rotate(-2deg);
+    transform: rotate(-2deg) scale(1.1);
   }
   .title {
     text-align: center;
