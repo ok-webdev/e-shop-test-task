@@ -10,7 +10,11 @@
   );
 
   if (!item.value) {
-    throw createError({ statusCode: 404, statusMessage: 'Item not found' });
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Item not found',
+      fatal: true,
+    });
   }
   const { image, title, description, price } = item.value;
 </script>
