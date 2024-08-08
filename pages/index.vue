@@ -1,34 +1,28 @@
+<script setup lang="ts">
+  import type { IItem } from '@/types';
 
-import { ref, onMounted } from 'vue'
-<script setup>
-const items = ref([]);
-
-const getItems = async () => {
-  const response = await fetch('https://fakestoreapi.com/products');
-  items.value = await response.json();
-}
-
-onMounted(() => getItems())
-
-
+  const { data: items } = await useFetch<IItem[]>(
+    'https://fakestoreapi.com/products'
+  );
 </script>
-
 
 <template>
   <div class="cards container">
-    <item-card 
+    <item-card
       v-for="item in items"
       :key="item.id"
+      :id="item.id"
       :title="item.title"
       :price="item.price"
-      :src="item.image"/>
+      :src="item.image"
+    />
   </div>
 </template>
 
 <style>
-  .cards{
+  .cards {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
   }
