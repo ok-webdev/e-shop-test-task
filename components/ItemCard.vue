@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  const props = defineProps({
+  const { id, title, price, src } = defineProps({
     id: {
       type: Number,
       required: true,
@@ -18,18 +18,22 @@
     },
   });
 
-  const fixedTitle = props.title.slice(0, 20) + '...';
+  const fixedTitle = title.slice(0, 20) + '...';
+
+  const addToCart = () => {
+    console.log(id);
+  };
 </script>
 
 <template>
-  <div class="item-card">
+  <NuxtLink :to="`/item/${id}`" class="item-card">
     <p class="title">{{ fixedTitle }}</p>
     <div class="image">
-      <img :src="props.src" :alt="props.title" />
+      <img :src :alt="title" />
     </div>
-    <p class="price">{{ props.price }} $</p>
-    <base-button>Add to cart</base-button>
-  </div>
+    <p class="price">{{ price }} $</p>
+    <base-button @click.prevent="addToCart">Add to cart</base-button>
+  </NuxtLink>
 </template>
 
 <style scoped>
@@ -45,6 +49,9 @@
     border-color: #888;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   }
+  .item-card:hover::after {
+    width: 0;
+  }
 
   .item-card:nth-child(odd):hover {
     transform: rotate(2deg) scale(1.1);
@@ -57,14 +64,15 @@
     font-size: 18px;
   }
   .image {
-    max-width: 80px;
-    height: 100px;
+    height: 120px;
     margin: 0 auto;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
   img {
-    width: 100%;
+    max-width: 70%;
+    max-height: 100%;
   }
   .price {
     text-align: right;
