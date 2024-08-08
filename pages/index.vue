@@ -1,6 +1,10 @@
 <script setup lang="ts">
   import type { IItem } from '@/types';
 
+  useHead({
+    title: 'Another test task | Home',
+  });
+
   const { data: items } = await useFetch<IItem[]>(
     'https://fakestoreapi.com/products'
   );

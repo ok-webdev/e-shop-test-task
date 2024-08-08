@@ -20,6 +20,10 @@
 </script>
 
 <template>
+  <Head>
+    <Title>Another test task | {{ title }}</Title>
+    <Meta name="description" :content="description" />
+  </Head>
   <div class="item container">
     <img :src="image" :alt="title" />
     <div class="desc">

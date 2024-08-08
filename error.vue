@@ -1,4 +1,7 @@
 <script setup lang="ts">
+  useHead({
+    title: 'Another test task | Error',
+  });
   const { error } = defineProps<{
     error: { statusCode: number; message: string };
   }>();
@@ -8,6 +11,9 @@
   };
 </script>
 <template>
+  <Head>
+    <Title>Another test task | {{ error.message }}</Title>
+  </Head>
   <div class="error">
     <h1>Oops...</h1>
     <h2>{{ error.statusCode }}</h2>

@@ -5,5 +5,8 @@
 </script>
 
 <template>
+  <Head>
+    <Title>Another test task | Cart</Title>
+  </Head>
   <div class="container">Cart</div>
 </template>
