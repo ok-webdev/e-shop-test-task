@@ -1,23 +1,5 @@
-import {watch, ref} from 'vue';
-
-<script setup lang="ts">
-  const route = useRoute();
-  const isShowCart = ref(true);
-
-  watch(
-    () => route.path,
-    (newRoute) => {
-      if (newRoute === '/cart') {
-        isShowCart.value = false;
-      } else {
-        isShowCart.value = true;
-      }
-    }
-  );
-</script>
-
 <template>
-  <div v-if="isShowCart" class="cart">
+  <div class="cart">
     <NuxtLink class="cart-link" to="/cart">
       <img src="@/assets/icons/cart.svg" alt="Cart icon" />
     </NuxtLink>
@@ -27,8 +9,8 @@ import {watch, ref} from 'vue';
 <style scoped>
   .cart {
     position: fixed;
-    bottom: 50px;
-    right: 50px;
+    bottom: 30px;
+    right: 30px;
   }
   .cart-link {
     width: 50px;
@@ -38,8 +20,11 @@ import {watch, ref} from 'vue';
     align-items: center;
     border-radius: 50%;
     background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    opacity: 0.5;
   }
   .cart-link:hover {
+    opacity: 1;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     animation-duration: 0.3s;
     animation-name: shake;
