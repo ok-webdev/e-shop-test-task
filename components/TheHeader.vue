@@ -9,7 +9,7 @@
 
 <style scoped>
   header {
-    padding: 15px;
+    padding: 25px;
   }
   nav {
     display: flex;
