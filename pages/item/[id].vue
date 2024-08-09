@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { useRoute } from 'vue-router';
+  import { useAddToCart } from '@/hooks/addToCart';
   import type { IItem } from '@/types';
 
   const { id } = useRoute().params;
@@ -17,6 +18,12 @@
     });
   }
   const { image, title, description, price } = item.value;
+
+  const { addToCart } = useAddToCart();
+
+  const addItem = (item: IItem) => {
+    addToCart({ src: image, title, price, id: item.id, quantity: 1 });
+  };
 </script>
 
 <template>
@@ -30,7 +37,7 @@
       <h2>{{ title }}</h2>
       <p>{{ description }}</p>
       <p class="price">Price - {{ price }} $</p>
-      <base-button>Add to cart</base-button>
+      <base-button @click="addItem">Add to cart</base-button>
     </div>
   </div>
 </template>
@@ -54,5 +61,6 @@
   .price {
     font-size: 18px;
     font-weight: bold;
+    margin-bottom: 20px;
   }
 </style>
