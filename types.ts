@@ -9,4 +9,13 @@ export interface IItem {
     rate: number;
   };
   title: string;
+  quantity: number;
+}
+
+export interface ICartItem {
+  id: number;
+  src: string;
+  title: string;
+  price: number;
+  quantity: number;
 }
