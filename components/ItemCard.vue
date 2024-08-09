@@ -16,13 +16,16 @@
       type: String,
       required: true,
     },
+    quantity: {
+      type: Number,
+      default: 1,
+    },
+    isInCart: {
+      type: Boolean,
+    },
   });
 
   const fixedTitle = title.slice(0, 20) + '...';
-
-  const addToCart = () => {
-    console.log(id);
-  };
 </script>
 
 <template>
@@ -32,14 +35,13 @@
       <img :src :alt="title" />
     </div>
     <p class="price">{{ price }} $</p>
-    <base-button @click.prevent="addToCart">Add to cart</base-button>
+    <base-button @click.prevent="$emit('add')">Add to cart</base-button>
   </NuxtLink>
 </template>
 
 <style scoped>
   .item-card {
-    background-color: #fff;
-    width: 230px;
+    width: 250px;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 15px;
@@ -69,6 +71,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
   }
   img {
     max-width: 70%;
