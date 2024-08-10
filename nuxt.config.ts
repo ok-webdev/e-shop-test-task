@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['@/assets/main.css'],
   generate: {
-    routes: ['/contacts'],
+    routes: ['/', '/contacts'],
   },
   app: {
     head: {
@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    '/': { swr: true },
+    '/': { swr: 3600 },
   },
 
   modules: ['@pinia/nuxt'],
