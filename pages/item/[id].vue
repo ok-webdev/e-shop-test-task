@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useRoute } from 'vue-router';
-  import { useAddToCart } from '@/hooks/addToCart';
+  import { useAddToCart } from '~/composables/addToCart';
   import type { IItem } from '@/types';
 
   const { id } = useRoute().params;
