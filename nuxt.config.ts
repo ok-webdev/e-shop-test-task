@@ -18,11 +18,7 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    '/': {
-      cache: {
-        maxAge: 1000,
-      },
-    },
+    '/': { swr: true },
   },
 
   modules: ['@pinia/nuxt'],
