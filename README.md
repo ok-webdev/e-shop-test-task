@@ -1,6 +1,14 @@
-# Nuxt 3 Minimal Starter
+# Test task
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## E-Shop pages(Home, Product, Cart) with Nuxt 3
+
+## Deployed
+
+[Watch here](https://e-shop-test-task.vercel.app/)
+
+<details>
+
+<summary>Nuxt 3 Minimal Starter</summary>
 
 ## Setup
 
@@ -72,4 +80,4 @@ yarn preview
 bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+</details>
