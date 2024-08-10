@@ -3,7 +3,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   css: ['@/assets/main.css'],
-
+  generate: {
+    routes: ['/contacts'],
+  },
   app: {
     head: {
       title: 'Another test task',
@@ -16,7 +18,11 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    '/': { swr: true },
+    '/': {
+      cache: {
+        maxAge: 1000,
+      },
+    },
   },
 
   modules: ['@pinia/nuxt'],
