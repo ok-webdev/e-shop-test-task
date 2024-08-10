@@ -14,7 +14,10 @@
 
 <template>
   <Head>
-    <Title>Another test task | Cart</Title>
+    <Title
+      >Another test task |
+      {{ totalQuantity() ? 'Cart - ' + totalQuantity() : 'Empty cart' }}</Title
+    >
   </Head>
   <div class="container">
     <p v-if="!items.length">There are {{ items.length }} items in the cart</p>
