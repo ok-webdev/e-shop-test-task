@@ -1,61 +1,24 @@
 <script setup lang="ts">
   import { ref, watch } from 'vue';
   import type { IItem, ICartItem } from '@/types';
-  import { useAddToCart } from '@/hooks/addToCart';
+  import { useAddToCart } from '@/composables/addToCart';
+  import { useItems } from '@/composables/useItems';
   const nuxtApp = useNuxtApp();
   useHead({
     title: 'Another test task | Home',
   });
 
-  const { data: items } = await useFetch<IItem[]>(
-    'https://fakestoreapi.com/products',
-    {
-      getCachedData(key) {
-        return nuxtApp.payload.data[key] || nuxtApp.static.data[key];
-      },
-    }
-  );
-
-  let filteredItems = ref(items);
-
-  const { data: categories } = await useFetch<string[]>(
-    'https://fakestoreapi.com/products/categories'
-    // {
-    //   getCachedData(key) {
-    //     return nuxtApp.payload.data[key] || nuxtApp.static.data[key];
-    //   },
-    // }
-  );
-
-  const filter = ref('all');
-
-  watch(filter, async (newValue, oldValue) => {
-    if (newValue !== oldValue && newValue === 'all') {
-      const data = await $fetch<IItem[]>('https://fakestoreapi.com/products');
-      filteredItems.value = data;
-    }
-    if (newValue !== oldValue && newValue !== 'all') {
-      const data = await $fetch<IItem[]>(
-        `https://fakestoreapi.com/products/category/${newValue}`
-      );
-      filteredItems.value = data;
-    }
-  });
-
+  const selectedCategory = ref<string>('');
+  const { items, loading, error } = useItems(selectedCategory);
   const { addToCart } = useAddToCart();
 </script>
 
 <template>
   <div class="container">
-    <select class="filter" v-model="filter">
-      <option value="all">all</option>
-      <option v-for="category in categories" :key="category" :value="category">
-        {{ category }}
-      </option>
-    </select>
-    <div class="cards">
+    <CategoryFilter v-model="selectedCategory" />
+    <div v-if="!loading" class="cards">
       <item-card
-        v-for="item in filteredItems"
+        v-for="item in items"
         :key="item.id"
         :id="item.id"
         :title="item.title"
@@ -75,7 +38,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .cards {
     display: flex;
     justify-content: center;
