@@ -2,34 +2,43 @@
   import { ref, watch } from 'vue';
   import type { IItem, ICartItem } from '@/types';
   import { useAddToCart } from '@/hooks/addToCart';
-
+  const nuxtApp = useNuxtApp();
   useHead({
     title: 'Another test task | Home',
   });
 
   const { data: items } = await useFetch<IItem[]>(
-    'https://fakestoreapi.com/products'
+    'https://fakestoreapi.com/products',
+    {
+      getCachedData(key) {
+        return nuxtApp.payload.data[key] || nuxtApp.static.data[key];
+      },
+    }
   );
 
   let filteredItems = ref(items);
 
   const { data: categories } = await useFetch<string[]>(
     'https://fakestoreapi.com/products/categories'
+    // {
+    //   getCachedData(key) {
+    //     return nuxtApp.payload.data[key] || nuxtApp.static.data[key];
+    //   },
+    // }
   );
 
   const filter = ref('all');
 
-  const filterHandler = (event: Event) => {
-    const filterValue = (event.target as HTMLTextAreaElement).value;
-    console.log(filterValue);
-  };
-
   watch(filter, async (newValue, oldValue) => {
-    if (newValue !== oldValue) {
-      const { data } = await useFetch<IItem[]>(
+    if (newValue !== oldValue && newValue === 'all') {
+      const data = await $fetch<IItem[]>('https://fakestoreapi.com/products');
+      filteredItems.value = data;
+    }
+    if (newValue !== oldValue && newValue !== 'all') {
+      const data = await $fetch<IItem[]>(
         `https://fakestoreapi.com/products/category/${newValue}`
       );
-      filteredItems.value = data.value;
+      filteredItems.value = data;
     }
   });
 
@@ -38,7 +47,7 @@
 
 <template>
   <div class="container">
-    <select class="filter" v-model="filter" @change="filterHandler">
+    <select class="filter" v-model="filter">
       <option value="all">all</option>
       <option v-for="category in categories" :key="category" :value="category">
         {{ category }}
