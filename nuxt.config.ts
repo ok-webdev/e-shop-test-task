@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['@/assets/main.css'],
   generate: {
-    routes: ['/contacts'],
+    routes: ['/', '/contacts'],
   },
   app: {
     head: {
