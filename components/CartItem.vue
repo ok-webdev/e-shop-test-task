@@ -37,11 +37,18 @@
         <base-button @click="$emit('increment')">+</base-button>
       </div>
     </div>
+    <img
+      @click="$emit('remove')"
+      class="close"
+      src="@/assets/icons/close.svg"
+      alt="close icon"
+    />
   </div>
 </template>
 
 <style scoped>
   .cart-item {
+    position: relative;
     height: 200px;
     display: flex;
     align-items: center;
@@ -77,5 +84,18 @@
   .info {
     display: grid;
     gap: 15px;
+  }
+  .close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.5s ease-in-out;
+  }
+  .close:hover {
+    opacity: 0.8;
   }
 </style>

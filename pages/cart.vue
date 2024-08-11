@@ -7,8 +7,13 @@
   });
 
   const store = useCart();
-  const { increaseQuantity, decreaseQuantity, totalPrice, totalQuantity } =
-    store;
+  const {
+    increaseQuantity,
+    decreaseQuantity,
+    totalPrice,
+    totalQuantity,
+    removeItem,
+  } = store;
   const { items } = storeToRefs(store);
 </script>
 
@@ -32,6 +37,7 @@
         :quantity="item.quantity"
         @increment="increaseQuantity(item.id)"
         @decrement="decreaseQuantity(item.id)"
+        @remove="removeItem(item.id)"
       />
     </div>
     <bottom-line

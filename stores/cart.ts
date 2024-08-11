@@ -31,6 +31,10 @@ export const useCart = defineStore('cart', () => {
     }
   };
 
+  const removeItem = (id: number): void => {
+    items.value = items.value.filter((i) => i.id !== id);
+  };
+
   const totalPrice = (): number => {
     return +items.value
       .reduce((total, item) => total + item.price * item.quantity, 0)
@@ -48,5 +52,6 @@ export const useCart = defineStore('cart', () => {
     increaseQuantity,
     totalPrice,
     totalQuantity,
+    removeItem,
   };
 });
