@@ -6,6 +6,8 @@
 
 [Watch here](https://e-shop-test-task.vercel.app/)
 
+[or here](https://e-shop-test-task.netlify.app/)
+
 <details>
 
 <summary>Nuxt 3 Minimal Starter</summary>
